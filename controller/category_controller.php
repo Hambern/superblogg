@@ -1,10 +1,33 @@
 <?php
 class Category_Controller extends Controller {
-  
+
   public function acl($action, $args = []) {
+    if ($action == "view")
+      return ["postsView"];
     return ["categoryAdmin"];
   }
-  
+
+  public function viewAction($args = []) {
+    if (empty($args[0]))
+      return $this->notFound();
+    $Category = $this->getEntity("Category", $args[0]);
+    if (!$Category->id())
+      return $this->notFound();
+    $values['where'] = [
+      ['category_id','=',$Category->id()]
+    ];
+    $Post = $this->getModel("Post");
+    $Pager = newClass("Pager");
+    $Pager->ppp = 3;
+    $Pager->setNum($Post->searchNum($values));
+    $values["limit"] = [$Pager->start(), $Pager->ppp];
+    $this->viewData["Pager"] = $Pager->render();
+    $this->viewData["Posts"] = $Post->search($values);
+    $this->viewData["Category"] = $Category;
+    $this->viewData["Categories"] = $this->Model->search();
+    return $this->view("view");
+  }
+
   public function addAction() {
     $Form = $this->getForm("CategoryEdit");
     if ($Form->isSubmitted()) {
@@ -20,7 +43,7 @@ class Category_Controller extends Controller {
     $this->viewData["form"] = $Form->render();
     return $this->view("add");
   }
-  
+
   public function editAction($args = []) {
     if (empty($args[0]))
       return $this->notFound();
@@ -41,7 +64,7 @@ class Category_Controller extends Controller {
     $this->viewData["form"] = $Form->render();
     return $this->view("edit");
   }
-  
+
   public function deleteAction($args = []) {
     if (empty($args[0]))
       return $this->notFound();
@@ -62,7 +85,7 @@ class Category_Controller extends Controller {
     $this->viewData["form"] = $Form->render();
     return $this->view("delete");
   }
-  
+
   public function listAction() {
     $values = (!empty($_SESSION["category_list_search"]) ? $_SESSION["category_list_search"] : []);
     $Form = $this->getForm("Search", $values);
@@ -79,5 +102,5 @@ class Category_Controller extends Controller {
     $this->viewData["items"] = $this->Model->listSearch($values);
     return $this->view("list");
   }
-  
+
 }

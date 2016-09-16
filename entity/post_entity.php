@@ -5,6 +5,14 @@ class Post_Entity extends Entity {
     return $this->getStoredEntity("File", $this->get("image_id"));
   }
 
+  public function category() {
+    return $this->getStoredEntity("Category", $this->get("category_id"));
+  }
+
+  public function user() {
+    return $this->getStoredEntity("User", $this->get("user_id"));
+  }
+
   protected function schema() {
     $schema = parent::schema();
     $schema["table"] = "post";
@@ -30,5 +38,5 @@ class Post_Entity extends Entity {
     ];
     return $schema;
   }
-  
+
 }

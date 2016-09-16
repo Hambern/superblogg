@@ -12,5 +12,5 @@ class Category_Entity extends Entity {
     ];
     return $schema;
   }
-  
+
 }

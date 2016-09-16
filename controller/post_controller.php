@@ -1,10 +1,23 @@
 <?php
 class Post_Controller extends Controller {
-  
+
   public function acl($action, $args = []) {
+    if ($action == "view")
+      return ["postsView"];
     return ["postAdmin"];
   }
-  
+
+  public function viewAction($args = []) {
+    if (empty($args[0]))
+      return $this->notFound();
+    $Post = $this->getEntity("Post", $args[0]);
+    if (!$Post->id())
+      return $this->notFound();
+    $this->viewData["Post"] = $Post;
+    $this->viewData["Categories"] = $this->getModel("Category")->search();
+    return $this->view("view");
+  }
+
   public function addAction() {
     $Form = $this->getForm("PostEdit");
     if ($Form->isSubmitted()) {
@@ -20,7 +33,7 @@ class Post_Controller extends Controller {
     $this->viewData["form"] = $Form->render();
     return $this->view("add");
   }
-  
+
   public function editAction($args = []) {
     if (empty($args[0]))
       return $this->notFound();
@@ -41,7 +54,7 @@ class Post_Controller extends Controller {
     $this->viewData["form"] = $Form->render();
     return $this->view("edit");
   }
-  
+
   public function deleteAction($args = []) {
     if (empty($args[0]))
       return $this->notFound();
@@ -62,7 +75,7 @@ class Post_Controller extends Controller {
     $this->viewData["form"] = $Form->render();
     return $this->view("delete");
   }
-  
+
   public function listAction() {
     $values = (!empty($_SESSION["post_list_search"]) ? $_SESSION["post_list_search"] : []);
     $Form = $this->getForm("Search", $values);
@@ -79,5 +92,5 @@ class Post_Controller extends Controller {
     $this->viewData["items"] = $this->Model->listSearch($values);
     return $this->view("list");
   }
-  
+
 }
