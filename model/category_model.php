@@ -68,16 +68,4 @@ class Category_Model extends Model {
   public function search($values = array()) {
     return $this->getEntities("Category", $this->Db->getRows($this->searchQuery($values)));
   }
-
-  public function getPaginatedList($per_page, $values = array()) {
-    $Pager = newClass("Pager");
-    $Pager->ppp = $per_page;
-    $Pager->setNum($this->searchNum($values));
-    $values["limit"] = [$Pager->start(), $Pager->ppp];
-    return [
-      "pager" => $Pager->render(),
-      "list" => $this->search($values),
-    ];
-  }
-
 }
