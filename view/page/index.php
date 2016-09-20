@@ -1,8 +1,6 @@
 <?php
   $this->Html->theme = "front";
   $this->Html->title = "Startsidan";
-  setlocale(LC_ALL, 'sv_SE');
-  setlocale(LC_ALL, "swedish");
 ?>
 
 <div class="container">
