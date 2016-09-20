@@ -16,13 +16,12 @@ class Page_Controller extends Page_Controller_Core {
    */
   public function indexAction() {
     $Post = $this->getModel("Post");
-    $values = array();
     $Pager = newClass("Pager");
     $Pager->ppp = 3;
-    $Pager->setNum($Post->searchNum($values));
+    $Pager->setNum($Post->searchNum());
     $values["limit"] = [$Pager->start(), $Pager->ppp];
-    $this->viewData["Pager"] = $Pager->render();
     $this->viewData["Posts"] = $Post->search($values);
+    $this->viewData["Pager"] = $Pager->render();
     $this->viewData["Categories"] = $this->getModel("Category")->search();
     return $this->view("index");
   }

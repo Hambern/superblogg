@@ -43,28 +43,25 @@ class Post_Model extends Model {
     return $this->getEntities("Post", $this->Db->getRows($this->listSearchQuery($values)));
   }
 
-  public function searchQuery($values = []) {
+  public function searchQuery($values) {
     $query = [
       "from" => "post",
       "cols" => ["id"],
     ];
-    if (!empty($values["where"])) {
-      foreach ($values["where"] as $i => $where) {
-        list($key,$delimiter,$value) = $where;
-        $variable = ":q".$i;
-        $query["where"][] = implode(" ", [$key,$delimiter,$variable]);
-        $query["vars"][$variable] = $value;
+    if (!empty($values["category"])) {
+      $categories = explode(" ", $values["category"]);
+      foreach ($categories as $i => $category) {
+        $key = ":category".$i;
+        $query["where"][] = "category_id = ".$key;
+        $query["vars"][$key] = $category;
       }
-    }
-    if (!empty($values["order"])) {
-      foreach ($values["order"] as $i => $order) {
-        $query["order"][] = $order;
-      }
-    } else {
-      $query["order"][] = "id desc";
     }
     if (!empty($values["limit"]))
       $query["limit"] = $values["limit"];
+    if (!empty($values["order"]))
+      $query["order"] = $values["order"];
+    else
+      $query["order"] = ['id desc'];
     return $query;
   }
 

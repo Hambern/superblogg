@@ -50,7 +50,7 @@
       <ul class="category-list">
         <a href="/">
           <li>
-            <i class="fa fa-tag"></i>
+            <i class="fa fa-tags"></i>
             Alla kategorier
           </li>
         </a>

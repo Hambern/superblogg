@@ -48,20 +48,13 @@ class Category_Model extends Model {
       "from" => "category",
       "cols" => ["id"],
     ];
-    if (!empty($values["where"])) {
-      foreach ($values["where"] as $i => $where) {
-        list($key,$delimiter,$value) = $where;
-        $variable = ":q".$i;
-        $query["where"][] = implode(" ", [$key,$delimiter,$variable]);
-        $query["vars"][$variable] = $value;
+    if (!empty($values["q"])) {
+      $qs = explode(" ", $values["q"]);
+      foreach ($qs as $i => $q) {
+        $key = ":q".$i;
+        // $query["where"][] = "title LIKE ".$key;
+        // $query["vars"][$key] = $q;
       }
-    }
-    if (!empty($values["order"])) {
-      foreach ($values["order"] as $i => $order) {
-        $query["order"][] = $order;
-      }
-    } else {
-      $query["order"][] = "id desc";
     }
     if (!empty($values["limit"]))
       $query["limit"] = $values["limit"];

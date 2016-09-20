@@ -1,6 +1,8 @@
 <?php
   $this->Html->theme = "front";
   $this->Html->title = "Startsidan";
+  setlocale(LC_ALL, 'sv_SE');
+  setlocale(LC_ALL, "swedish");
 ?>
 
 <div class="container">
@@ -42,7 +44,7 @@
       <ul class="category-list">
         <a href="/" class="active">
           <li>
-            <i class="fa fa-tag"></i>
+            <i class="fa fa-tags"></i>
             Alla kategorier
           </li>
         </a>
