@@ -13,9 +13,7 @@ class Category_Controller extends Controller {
     $Category = $this->getEntity("Category", $args[0]);
     if (!$Category->id())
       return $this->notFound();
-    $values['where'] = [
-      ['category_id','=',$Category->id()]
-    ];
+    $values['where'][] = ['category_id','=',$Category->id()];
     $Post = $this->getModel("Post");
     $Pager = newClass("Pager");
     $Pager->ppp = 3;

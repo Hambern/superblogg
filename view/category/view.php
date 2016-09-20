@@ -48,6 +48,12 @@
     </div>
     <div class="four columns">
       <ul class="category-list">
+        <a href="/">
+          <li>
+            <i class="fa fa-tag"></i>
+            Alla kategorier
+          </li>
+        </a>
       <?php foreach ($Categories as $Category) { ?>
         <a class="<?=$Category->getPath() == REQUEST_PATH ? 'active':''?>" href="<?=$Category->url()?>">
           <li>

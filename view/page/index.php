@@ -42,6 +42,12 @@
     </div>
     <div class="four columns">
       <ul class="category-list">
+        <a href="/" class="active">
+          <li>
+            <i class="fa fa-tag"></i>
+            Alla kategorier
+          </li>
+        </a>
       <?php foreach ($Categories as $Category) { ?>
         <a href="<?=$Category->url()?>">
           <li>
