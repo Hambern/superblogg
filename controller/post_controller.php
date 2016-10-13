@@ -14,7 +14,8 @@ class Post_Controller extends Controller {
     if (!$Post->id())
       return $this->notFound();
     $this->viewData["Post"] = $Post;
-    $this->viewData["Categories"] = $this->getModel("Category")->search();
+    $this->viewData["categories"] = $this->getModel("Category")->search();
+    $this->viewData["post_search"] = $this->getForm("PostSearch")->render();
     return $this->view("view");
   }
 

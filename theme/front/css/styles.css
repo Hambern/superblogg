@@ -30,15 +30,20 @@ a.active {
   color: #000;
 }
 
-h1.page-title {
+.page-title h1 {
   font-size: 4.2em;
-  padding-bottom: .3em;
+}
+
+.page-title {
+  padding: .3em;
   border-bottom: 3px solid #F7CA18;
-  margin: 2em auto;
+  margin: 9em auto;
 }
 
 .icon-nav i {
   position: absolute;
+  top: -.7em;
+  left: -.8em;
 }
 
 #page {
@@ -71,8 +76,6 @@ img.post-view {
 }
 
 ul.category-list {
-  padding: 2em 0em;
-  border-top: 3px solid #F7CA18;
   color: #F7CA18;
   list-style: none;
   font-family: 'Oswald', sans-serif;
@@ -108,4 +111,35 @@ i.fa {
 .pager a:hover {
   background-color: #FFF;
   color: #000;
+}
+
+input[type], textarea {
+  border: 3px solid #f1f1f1;
+  background: #f1f1f1;
+  font-size: 1em;
+  font-family: 'Lora', serif;
+  color: #999;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  padding: 2em;
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  transition:.5s;
+  border-radius: .5em;
+  -moz-border-radius: .5em;
+  -webkit-border-radius: .5em;
+}
+
+input[type]:focus, textarea {
+  border: 3px solid #F7CA18;
+  color: #000;
+  background: #fff;
+}
+
+.form-item-loader {
+  display: none;
 }

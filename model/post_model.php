@@ -56,6 +56,14 @@ class Post_Model extends Model {
         $query["vars"][$key] = $category;
       }
     }
+    if (!empty($values["search"])) {
+      $strings = explode(" ", $values["search"]);
+      foreach ($strings as $i => $string) {
+        $key = ":search".$i;
+        $query["where"][] = "title LIKE ".$key." OR content LIKE ".$key;
+        $query["vars"][$key] = "%".trim($string)."%";
+      }
+    }
     if (!empty($values["limit"]))
       $query["limit"] = $values["limit"];
     if (!empty($values["order"]))

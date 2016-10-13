@@ -19,10 +19,11 @@ class Category_Controller extends Controller {
     $Pager->ppp = 3;
     $Pager->setNum($Post->searchNum($values));
     $values["limit"] = [$Pager->start(), $Pager->ppp];
-    $this->viewData["Posts"] = $Post->search($values);
-    $this->viewData["Pager"] = $Pager->render();
+    $this->viewData["posts"] = $Post->search($values);
+    $this->viewData["pager"] = $Pager->render();
     $this->viewData["Category"] = $Category;
-    $this->viewData["Categories"] = $this->Model->search();
+    $this->viewData["categories"] = $this->Model->search();
+    $this->viewData["post_search"] = $this->getForm("PostSearch")->render();
     return $this->view("view");
   }
 

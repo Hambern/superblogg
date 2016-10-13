@@ -6,14 +6,20 @@
 ?>
 
 <div class="container">
-  <div class="row">
-    <div class="twelve column">
-      <div class="icon-nav">
-        <a href="/"><i class="fa fa-arrow-circle-left fa-5x"></i></a>
+  <div class="page-title">
+    <div class="row">
+      <div class="twelve columns">
+        <div class="icon-nav">
+          <a href="<?= BASE_URL ?>"><i class="fa fa-arrow-circle-left fa-5x"></i></a>
+        </div>
+        <h1>
+          <?=xss($Post->get('title'))?>
+        </h1>
       </div>
-      <h1 class="page-title">
-        <?=xss($Post->get('title'))?>
-      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="twelve columns">
       <img class="post-view" src="<?=$Post->image()->imageStyle("post_view")?>" alt="">
     </div>
   </div>
@@ -31,15 +37,16 @@
             </span>
             <span class="u-pull-right">
               <i class="fa fa-clock-o"></i>
-              <?=strftime("%y %m %d %H %M", $Post->get('created'))?>
+              <?=date("y m d H M", $Post->get('created'))?>
             </span>
           </div>
         </div>
       </div>
     </div>
     <div class="four columns">
+      <?=$post_search?>
       <ul class="category-list">
-      <?php foreach ($Categories as $Category) { ?>
+      <?php foreach ($categories as $Category) { ?>
         <a href="<?=$Category->url()?>">
           <li>
             <i class="fa fa-tag"></i>
